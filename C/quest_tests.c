@@ -42,6 +42,15 @@ static void test_playerFallsDown(void** state)
     testPlayerHealth = 100;  // reset
 }
 
+static void test_playerFallsDownNoDamage(void** state)
+{
+    (void)state;
+
+    playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayerMagic);
+
+    assert_int_equal(testPlayerHealth, 100);
+}
+
 static void test_itemToString(void** state)
 {
     (void)state;
@@ -65,6 +74,18 @@ static void test_itemReduceByUsage(void** state)
     testItemPower = 10; // reset
 }
 
+static void test_itemReduceByUsageToJunk(void** state)
+{
+    (void)state;
+
+    testItemPower = 1;
+    itemReduceByUsage(testItemKind, &testItemPower);
+
+    assert_int_equal(testItemPower, 0);
+    assert_string_equal(testItemKind, "Junk");
+    testItemPower = 10; // reset
+}
+
 static void test_itemApplyEffectToPlayer(void** state)
 {
     (void)state;
@@ -74,6 +95,16 @@ static void test_itemApplyEffectToPlayer(void** state)
 
     assert_int_equal(testPlayerStrength, 30);
     testPlayerStrength = 20; // reset
+}
+
+static void test_itemApplyEffectToPlayerJunk(void** state)
+{
+    (void)state;
+
+    itemApplyEffectToPlayer(testItemName, "Junk", testItemPower, &testPlayerHealth,
+                            &testPlayerStrength, &testPlayerMagic);
+
+    assert_int_equal(testPlayerStrength, 20);
 }
 
 static void test_itemRepair(void** state)
@@ -91,10 +122,13 @@ int main(void)
 {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_playerToString),
+        cmocka_unit_test(test_playerFallsDownNoDamage),
         cmocka_unit_test(test_playerFallsDown),
         cmocka_unit_test(test_itemToString),
         cmocka_unit_test(test_itemReduceByUsage),
+        cmocka_unit_test(test_itemReduceByUsageToJunk),
         cmocka_unit_test(test_itemApplyEffectToPlayer),
+        cmocka_unit_test(test_itemApplyEffectToPlayerJunk),
         cmocka_unit_test(test_itemRepair),
     };
 
