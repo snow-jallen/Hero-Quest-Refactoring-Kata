@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #include "quest.h"
+
+extern int rand(void);
 
 char* playerName = "Conan";
 int playerHealth = 100;
@@ -24,7 +24,7 @@ void playerToString(char* result, //
             playerName, playerHealth, playerStrength, playerMagic, playerCraftingSkill);
 }
 
-void playerFallsDown(int* playerHealth, int* playerStrength, int* playerMagic)
+void playerFallsDown(int* playerHealth, int* playerStrength)
 {
     printf("Player drops off a cliff.\n");
 

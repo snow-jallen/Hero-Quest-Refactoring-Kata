@@ -16,7 +16,7 @@ void playerToString(char* result, //
                     int playerMagic,
                     int playerCraftingSkill);
 
-void playerFallsDown(int* playerHealth, int* playerStrength, int* playerMagic);
+void playerFallsDown(int* playerHealth, int* playerStrength);
 
 void itemToString(char* result, //
                   const char* itemName,

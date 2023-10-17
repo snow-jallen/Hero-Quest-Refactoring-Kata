@@ -4,7 +4,6 @@
 
 #include "quest.h"
 #include <cmocka.h>
-#include <stdlib.h> /* srand */
 
 const char* testPlayerName = "Conan";
 int testPlayerHealth = 100;
@@ -15,6 +14,12 @@ int testPlayerCraftingSkill = 10;
 const char* testItemName = "Amulet of Strength";
 char* testItemKind = "Strength";
 int testItemPower = 10;
+
+/* Mock rand */
+int rand(void)
+{
+    return 5;
+}
 
 static void test_playerToString(void** state)
 {
@@ -35,7 +40,7 @@ static void test_playerFallsDown(void** state)
     (void)state;
 
     testPlayerStrength = 3;
-    playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayerMagic);
+    playerFallsDown(&testPlayerHealth, &testPlayerStrength);
 
     assert_int_equal(testPlayerHealth, 90);
     testPlayerStrength = 20; // reset
@@ -46,7 +51,7 @@ static void test_playerFallsDownNoDamage(void** state)
 {
     (void)state;
 
-    playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayerMagic);
+    playerFallsDown(&testPlayerHealth, &testPlayerStrength);
 
     assert_int_equal(testPlayerHealth, 100);
 }
@@ -79,10 +84,11 @@ static void test_itemReduceByUsageToJunk(void** state)
     (void)state;
 
     testItemPower = 1;
-    itemReduceByUsage(testItemKind, &testItemPower);
+    char itemKind[10] = "Strength";
+    itemReduceByUsage(itemKind, &testItemPower);
 
     assert_int_equal(testItemPower, 0);
-    assert_string_equal(testItemKind, "Junk");
+    assert_string_equal(itemKind, "Junk");
     testItemPower = 10; // reset
 }
 
@@ -111,10 +117,10 @@ static void test_itemRepair(void** state)
 {
     (void)state;
 
-    srand(5); // set a specific seed for rand() to control the random value
+    // srand(5); // set a specific seed for rand() to control the random value
     itemRepair(&testItemPower, testPlayerCraftingSkill);
 
-    assert_int_equal(testItemPower, 25);
+    assert_int_equal(testItemPower, 16);
     testItemPower = 10; // reset
 }
 
