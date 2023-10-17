@@ -5,11 +5,11 @@
 
 #include "quest.h"
 
-playerName = "Conan";
-playerHealth = 100;
-playerStrength = 20;
-playerMagic = 10;
-playerCraftingSkill = 10;
+char* playerName = "Conan";
+int playerHealth = 100;
+int playerStrength = 20;
+int playerMagic = 10;
+int playerCraftingSkill = 10;
 
 void playerToString(char* result, //
                     const char* playerName,
@@ -34,9 +34,9 @@ void playerFallsDown(int* playerHealth, int* playerStrength, int* playerMagic)
     }
 }
 
-amuletItemName = "Amulet of Strength";
-amuletItemKind = "Strength";
-amuletItemPower = 10;
+char* amuletItemName = "Amulet of Strength";
+char* amuletItemKind = "Strength";
+int amuletItemPower = 10;
 
 void itemToString(char* result, //
                   const char* itemName,

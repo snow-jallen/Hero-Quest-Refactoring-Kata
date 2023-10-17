@@ -1,13 +1,13 @@
 
-char* playerName;
-int playerHealth;
-int playerStrength;
-int playerMagic;
-int playerCraftingSkill;
+extern char* playerName;
+extern int playerHealth;
+extern int playerStrength;
+extern int playerMagic;
+extern int playerCraftingSkill;
 
-char* amuletItemName;
-char* amuletItemKind;
-int amuletItemPower;
+extern char* amuletItemName;
+extern char* amuletItemKind;
+extern int amuletItemPower;
 
 void playerToString(char* result, //
                     const char* playerName,
