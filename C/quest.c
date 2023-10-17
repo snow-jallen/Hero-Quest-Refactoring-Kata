@@ -3,11 +3,13 @@
 #include <string.h>
 #include <time.h>
 
-char playerName[] = "Conan";
-int playerHealth = 100;
-int playerStrength = 20;
-int playerMagic = 10;
-int playerCraftingSkill = 10;
+#include "quest.h"
+
+playerName = "Conan";
+playerHealth = 100;
+playerStrength = 20;
+playerMagic = 10;
+playerCraftingSkill = 10;
 
 void playerToString(char* result, //
                     const char* playerName,
@@ -22,18 +24,6 @@ void playerToString(char* result, //
             playerName, playerHealth, playerStrength, playerMagic, playerCraftingSkill);
 }
 
-int f4()
-{
-    char playerAttributesString[256];
-
-    playerToString(playerAttributesString, playerName, playerHealth,
-                   playerStrength, playerMagic, playerCraftingSkill);
-
-    printf("%s", playerAttributesString);
-
-    return 0;
-}
-
 void playerFallsDown(int* playerHealth, int* playerStrength, int* playerMagic)
 {
     printf("Player drops off a cliff.\n");
@@ -44,18 +34,9 @@ void playerFallsDown(int* playerHealth, int* playerStrength, int* playerMagic)
     }
 }
 
-int f2()
-{
-    playerStrength = 3; // Assuming a low strength value
-
-    playerFallsDown(&playerHealth, &playerStrength, &playerMagic);
-
-    return 0;
-}
-
-char amuletItemName[] = "Amulet of Strength";
-char amuletItemKind[] = "Strength";
-int amuletItemPower = 10;
+amuletItemName = "Amulet of Strength";
+amuletItemKind = "Strength";
+amuletItemPower = 10;
 
 void itemToString(char* result, //
                   const char* itemName,
@@ -63,17 +44,6 @@ void itemToString(char* result, //
                   int itemPower)
 {
     sprintf(result, "Item: %s\nKind: %s\nPower: %d\n", itemName, itemKind, itemPower);
-}
-
-int f5()
-{
-    char itemAttributesString[256]; // Adjust the size as needed
-
-    itemToString(itemAttributesString, amuletItemName, amuletItemKind, amuletItemPower);
-
-    printf("%s", itemAttributesString);
-
-    return 0;
 }
 
 void itemReduceByUsage(char* itemKind, int* itemPower)
@@ -85,13 +55,6 @@ void itemReduceByUsage(char* itemKind, int* itemPower)
     if (*itemPower == 0) {
         strcpy(itemKind, "Junk");
     }
-}
-
-int f3()
-{
-    itemReduceByUsage(amuletItemKind, &amuletItemPower);
-
-    return 0;
 }
 
 void itemApplyEffectToPlayer(char* itemName,
@@ -117,14 +80,6 @@ void itemApplyEffectToPlayer(char* itemName,
     }
 }
 
-int f1()
-{
-    itemApplyEffectToPlayer(amuletItemName, amuletItemKind, amuletItemPower,
-                            &playerHealth, &playerStrength, &playerMagic);
-
-    return 0;
-}
-
 void itemRepair(int* itemPower, int playerCraftingSkill)
 {
     printf("Using the repair skill to fix the item:\n");
@@ -134,13 +89,4 @@ void itemRepair(int* itemPower, int playerCraftingSkill)
     *itemPower += repairAmount;
 
     printf("Repaired the item by %d points. Item's Durability: %d\n", repairAmount, *itemPower);
-}
-
-int f8()
-{
-    srand((unsigned)time(NULL));
-
-    itemRepair(&amuletItemPower, playerCraftingSkill);
-
-    return 0;
 }
