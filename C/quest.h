@@ -25,8 +25,8 @@ void itemToString(char* result, //
 
 void itemReduceByUsage(char* itemKind, int* itemPower);
 
-void itemApplyEffectToPlayer(char* itemName,
-                             char* itemKind,
+void itemApplyEffectToPlayer(const char* itemName,
+                             const char* itemKind,
                              int itemPower,
                              int* playerHealth,
                              int* playerStrength,

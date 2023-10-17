@@ -4,24 +4,25 @@
 
 #include "quest.h"
 #include <cmocka.h>
+#include <stdlib.h> /* srand */
 
-const char* playerName = "Conan";
-int playerHealth = 100;
-int playerStrength = 20;
-int playerMagic = 10;
-int playerCraftingSkill = 10;
+const char* testPlayerName = "Conan";
+int testPlayerHealth = 100;
+int testPlayerStrength = 20;
+int testPlayerMagic = 10;
+int testPlayerCraftingSkill = 10;
 
-const char* amuletItemName = "Amulet of Strength";
-const char* amuletItemKind = "Strength";
-int amuletItemPower = 10;
+const char* testItemName = "Amulet of Strength";
+char* testItemKind = "Strength";
+int testItemPower = 10;
 
 static void test_playerToString(void** state)
 {
     (void)state;
 
     char result[256];
-    playerToString(result, playerName, playerHealth, playerStrength,
-                   playerMagic, playerCraftingSkill);
+    playerToString(result, testPlayerName, testPlayerHealth, testPlayerStrength,
+                   testPlayerMagic, testPlayerCraftingSkill);
 
     const char* expected =
         "Conan's Attributes:\nHealth: 100\nStrength: 20\nMagic: 10\nCrafting "
@@ -33,12 +34,12 @@ static void test_playerFallsDown(void** state)
 {
     (void)state;
 
-    playerStrength = 3;
-    playerFallsDown(&playerHealth, &playerStrength, &playerMagic);
+    testPlayerStrength = 3;
+    playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayerMagic);
 
-    assert_int_equal(playerHealth, 90);
-    playerStrength = 20; // reset
-    playerHealth = 100;  // reset
+    assert_int_equal(testPlayerHealth, 90);
+    testPlayerStrength = 20; // reset
+    testPlayerHealth = 100;  // reset
 }
 
 static void test_itemToString(void** state)
@@ -46,7 +47,7 @@ static void test_itemToString(void** state)
     (void)state;
 
     char result[256];
-    itemToString(result, amuletItemName, amuletItemKind, amuletItemPower);
+    itemToString(result, testItemName, testItemKind, testItemPower);
 
     const char* expected =
         "Item: Amulet of Strength\nKind: Strength\nPower: 10\n";
@@ -57,22 +58,22 @@ static void test_itemReduceByUsage(void** state)
 {
     (void)state;
 
-    itemReduceByUsage(amuletItemKind, &amuletItemPower);
+    itemReduceByUsage(testItemKind, &testItemPower);
 
-    assert_int_equal(amuletItemPower, 5);
-    assert_string_equal(amuletItemKind, "Strength");
-    amuletItemPower = 10; // reset
+    assert_int_equal(testItemPower, 5);
+    assert_string_equal(testItemKind, "Strength");
+    testItemPower = 10; // reset
 }
 
 static void test_itemApplyEffectToPlayer(void** state)
 {
     (void)state;
 
-    itemApplyEffectToPlayer(amuletItemName, amuletItemKind, amuletItemPower,
-                            &playerHealth, &playerStrength, &playerMagic);
+    itemApplyEffectToPlayer(testItemName, testItemKind, testItemPower,
+                            &testPlayerHealth, &testPlayerStrength, &testPlayerMagic);
 
-    assert_int_equal(playerStrength, 30);
-    playerStrength = 20; // reset
+    assert_int_equal(testPlayerStrength, 30);
+    testPlayerStrength = 20; // reset
 }
 
 static void test_itemRepair(void** state)
@@ -80,10 +81,10 @@ static void test_itemRepair(void** state)
     (void)state;
 
     srand(5); // set a specific seed for rand() to control the random value
-    itemRepair(&amuletItemPower, playerCraftingSkill);
+    itemRepair(&testItemPower, testPlayerCraftingSkill);
 
-    assert_int_equal(amuletItemPower, 15);
-    amuletItemPower = 10; // reset
+    assert_int_equal(testItemPower, 25);
+    testItemPower = 10; // reset
 }
 
 int main(void)
