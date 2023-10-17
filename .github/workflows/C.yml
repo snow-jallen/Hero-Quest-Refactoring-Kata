@@ -1,0 +1,31 @@
+name: Test C
+
+on:
+  push:
+    paths:
+      - 'C/**'
+      - '.github/workflows/C.yml'
+  pull_request:
+    paths:
+      - 'C/**'
+      - '.github/workflows/C.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+
+    - name: Set up dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install libcmocka-dev
+
+    - name: Build
+      working-directory: C
+      run: gcc -std=c99 quest.c quest_tests.c -l cmocka -o QuestTest
+
+    - name: Test
+      working-directory: C
+      run: ./QuestTest
