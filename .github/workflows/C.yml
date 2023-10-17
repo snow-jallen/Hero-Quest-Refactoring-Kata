@@ -48,4 +48,4 @@ jobs:
       working-directory: C
       run: |
         cd build
-        ctest
+        ./quest_test

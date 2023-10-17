@@ -54,5 +54,5 @@ endfunction()
 
 add_cmocka_test(quest_test
         SOURCES quest_tests.c
-        LINK_LIBRARIES src cmocka-static)
+        LINK_LIBRARIES ${SRC_LIB_NAME} cmocka-static)
 add_cmocka_test_environment(add_test)
