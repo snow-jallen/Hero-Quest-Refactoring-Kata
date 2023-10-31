@@ -14,6 +14,8 @@ add_library(${SRC_LIB_NAME} ${SOURCES})
 target_sources(${SRC_LIB_NAME} PRIVATE ${SOURCES})
 target_include_directories(${SRC_LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
+add_executable(quest main.cpp)
+target_link_libraries(quest ${SRC_LIB_NAME})
 set(TEST_NAME quest_test)
 
 include(FetchContent)
