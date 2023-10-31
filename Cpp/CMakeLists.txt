@@ -9,15 +9,15 @@ set(CMAKE_CXX_STANDARD 20)
 enable_testing()
 
 set(SRC_LIB_NAME src)
-set(SOURCES sample.cpp)
+set(SOURCES quest.cpp)
 add_library(${SRC_LIB_NAME} ${SOURCES})
 target_sources(${SRC_LIB_NAME} PRIVATE ${SOURCES})
 target_include_directories(${SRC_LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-set(TEST_NAME sample_test)
+set(TEST_NAME quest_test)
 
 include(FetchContent)
-set(SOURCE_FILES sample_catch.cpp)
+set(SOURCE_FILES quest_catch.cpp)
 
 FetchContent_Declare(
         Catch2
