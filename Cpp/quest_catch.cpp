@@ -1,8 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include <cstdlib>
 #include <catch2/catch.hpp>
-#include <catch2/matchers/catch_matchers_string.hpp>
-using Catch::Matchers::EndsWith;
 
 #include "quest.h"
 
@@ -28,7 +26,7 @@ TEST_CASE("Quest")
             "Conan's Attributes:\nHealth: 100\nStrength: 20\nMagic: "
             "10\nCrafting "
             "Skill: 10\n";
-        REQUIRE_THAT(result, Equals(expected));
+        REQUIRE(*result == *expected);
     }
 
     SECTION("playerFallsDown")
@@ -55,7 +53,7 @@ TEST_CASE("Quest")
 
         const char* expected =
             "Item: Amulet of Strength\nKind: Strength\nPower: 10\n";
-        REQUIRE(result == expected);
+        REQUIRE(*result == *expected);
     }
 
     SECTION("itemReduceByUsage")
@@ -63,7 +61,7 @@ TEST_CASE("Quest")
         itemReduceByUsage(testItemKind, &testItemPower);
 
         REQUIRE(testItemPower == 5);
-        REQUIRE(testItemKind == "Strength");
+        REQUIRE(*testItemKind == *"Strength");
         testItemPower = 10; // reset
     }
 
@@ -74,7 +72,7 @@ TEST_CASE("Quest")
         itemReduceByUsage(itemKind, &testItemPower);
 
         REQUIRE(testItemPower == 0);
-        REQUIRE(itemKind == "Junk");
+        REQUIRE(*itemKind == *"Junk");
         testItemPower = 10; // reset
     }
 
