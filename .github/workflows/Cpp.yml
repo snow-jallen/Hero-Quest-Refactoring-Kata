@@ -1,0 +1,32 @@
+name: Test Cpp
+
+on:
+  push:
+    paths:
+      - 'Cpp/**'
+      - '.github/workflows/Cpp.yml'
+  pull_request:
+    paths:
+      - 'Cpp/**'
+      - '.github/workflows/Cpp.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+
+    - name: Build
+      working-directory: Cpp
+      run: |
+        mkdir build
+        cd build
+        cmake -G "Unix Makefiles" ..
+        cmake --build .
+
+    - name: Test
+      working-directory: Cpp
+      run: |
+        cd build
+        ctest
