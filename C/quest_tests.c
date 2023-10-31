@@ -1,6 +1,7 @@
 #include <setjmp.h>
 #include <stdarg.h>
 #include <stddef.h>
+#include <stdlib.h> 
 
 #include "quest.h"
 #include <cmocka.h>
@@ -14,12 +15,6 @@ int testPlayerCraftingSkill = 10;
 const char* testItemName = "Amulet of Strength";
 char* testItemKind = "Strength";
 int testItemPower = 10;
-
-/* Mock rand */
-int rand(void)
-{
-    return 5;
-}
 
 static void test_playerToString(void** state)
 {
@@ -117,10 +112,10 @@ static void test_itemRepair(void** state)
 {
     (void)state;
 
-    // srand(5); // set a specific seed for rand() to control the random value
+    srand(5); // control the random value
     itemRepair(&testItemPower, testPlayerCraftingSkill);
 
-    assert_int_equal(testItemPower, 16);
+    assert_int_equal(testItemPower, 26);
     testItemPower = 10; // reset
 }
 

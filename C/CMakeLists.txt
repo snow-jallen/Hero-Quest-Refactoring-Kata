@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 project(HeroQuest VERSION 1.0)
 
+set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_C_STANDARD 11)
 
 set(SRC_LIB_NAME src)
@@ -9,6 +10,10 @@ set(SOURCES quest.c)
 add_library(${SRC_LIB_NAME} ${SOURCES})
 target_sources(${SRC_LIB_NAME} PRIVATE ${SOURCES})
 target_include_directories(${SRC_LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(quest main.c)
+target_link_libraries(quest ${SRC_LIB_NAME})
+
 
 set(TEST_NAME test-cmocka)
 
