@@ -29,4 +29,4 @@ jobs:
       working-directory: Cpp
       run: |
         cd build
-        ctest
+        ./quest_test -r console -s

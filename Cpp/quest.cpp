@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <cstdlib>
 
 #include "quest.h"
-
-extern int rand(void);
 
 char* playerName = "Conan";
 int playerHealth = 100;

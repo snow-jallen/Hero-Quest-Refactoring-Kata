@@ -1,5 +1,8 @@
 #define CATCH_CONFIG_MAIN
-#include "catch2/catch.hpp"
+#include <cstdlib>
+#include <catch2/catch.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
+using Catch::Matchers::EndsWith;
 
 #include "quest.h"
 
@@ -13,12 +16,6 @@ const char* testItemName = "Amulet of Strength";
 char* testItemKind = "Strength";
 int testItemPower = 10;
 
-/* Mock rand */
-int rand(void)
-{
-    return 5;
-}
-
 TEST_CASE("Quest")
 {
     SECTION("playerToString")
@@ -31,7 +28,7 @@ TEST_CASE("Quest")
             "Conan's Attributes:\nHealth: 100\nStrength: 20\nMagic: "
             "10\nCrafting "
             "Skill: 10\n";
-        REQUIRE(result == expected);
+        REQUIRE_THAT(result, Equals(expected));
     }
 
     SECTION("playerFallsDown")
@@ -83,6 +80,7 @@ TEST_CASE("Quest")
 
     SECTION("itemApplyEffectToPlayer")
     {
+        testItemPower = 10; // reset again, why?
         itemApplyEffectToPlayer(testItemName, testItemKind, testItemPower, &testPlayerHealth,
                                 &testPlayerStrength, &testPlayerMagic);
 
@@ -100,10 +98,10 @@ TEST_CASE("Quest")
 
     SECTION("itemRepair")
     {
-        // srand(5); // set a specific seed for rand() to control the random value
+        srand(5); // control the random value
         itemRepair(&testItemPower, testPlayerCraftingSkill);
 
-        REQUIRE(testItemPower == 16);
+        REQUIRE(testItemPower == 26);
         testItemPower = 10; // reset
     }
 }
