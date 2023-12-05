@@ -18,15 +18,17 @@ The starting code is in C but we are using a C++ compiler and the files are alre
   * [ ] Create a new empty C++ class (use CLion - right click on the project 'new C++ class')
   * [ ] Name the new class - suggest you use a word used in the variable names of the data clump.
   * [ ] Add new public data fields for all the global variables we want to move to the class
-  * [ ] Create a new instance of the new class as a global variable
-  * [ ] The class members should have the same initial values as the globals we plan they will replace.
-  * Confirmation: all the code compiles, including the new class. It is not yet being used anywhere.
+  * Confirmation: the code compiles, including the new class. It is not yet being used anywhere
+* [ ] Create a constructor and use it to create an instance of the class
+  * [ ] Generate a constructor that will populate all the data fields (on the Code menu)
+  * [ ] Add a new global variable containing an new instance of the class. (Use the new constructor)
+  * Confirmation: all the code compiles and the tests pass. New global is not used.
 * [ ] Add the new class to all the method signatures alongside the data clump (Parallel Change)
   * [ ] Use 'change signature' refactoring.
   * [ ] Pass the new instance
   * Confirmation: all the code compiles. The new method parameter is not being used yet.
 * [ ] Use the new class instance instead of the global variables
-  * [ ] Use search and replace - a reference to x is replaced to <instancename>.x
+  * [ ] Use search and replace - a reference to x is replaced by instanceName.x
   * Confirmation: all the code compiles and the tests pass
 * [ ] Remove the data clump from the method signature
   * [ ] Use 'change signature' refactoring
