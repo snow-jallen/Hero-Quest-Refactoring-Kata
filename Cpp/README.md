@@ -21,7 +21,8 @@ The starting code is in C but we are using a C++ compiler and the files are alre
   * Confirmation: the code compiles, including the new class. It is not yet being used anywhere
 * [ ] Create a constructor and use it to create an instance of the class
   * [ ] Generate a constructor that will populate all the data fields (on the Code menu)
-  * [ ] Add a new global variable containing an new instance of the class. (Use the new constructor)
+  * [ ] Add a new global variable in `quest.cpp` containing a new instance of the class. (Use the constructor)
+  * [ ] Make the new global variable available in `quest.h` by declaring it there too as `extern`.
   * Confirmation: all the code compiles and the tests pass. New global is not used.
 * [ ] Add the new class to all the method signatures alongside the data clump (Parallel Change)
   * [ ] Use 'change signature' refactoring.
